@@ -27,7 +27,7 @@ class Solution(object):
                 # For both of these scenarios, the minimum is always on the LHS of mid
                 end = mid
                 
-        
+        # Using "<=" here in case there is only one element in the array
         if nums[start] <= nums[end]:
             return nums[start]
         elif nums[start] > nums[end]:

@@ -6,7 +6,8 @@ Created on Fri Aug 12 11:05:44 2022
 @author: zhiyuewei
 """
 
-class Solution(object):
+### Solution 1
+class Solution1(object):
     def findMin(self, nums):
         """
         :type nums: List[int]
@@ -33,6 +34,37 @@ class Solution(object):
         elif nums[start] > nums[end]:
             return nums[end]
         
+
+### Solution 2: Using inflection point
+class Solution2(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ### nums: unique elements
+        ### Another idea: find the index of the inflection point
+        start, end = 0, len(nums) - 1
+        
+        # If the array is not a rotated array
+        if nums[start] <= nums[end]:
+            return nums[start]
+        
+        # If the array is rotated
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] >= nums[start]:
+                # The inflection point is on the RHS of mid
+                start = mid
+            else:
+                # The inflection point is on the LHS of mid
+                end = mid
+        
+        # Exiting the loop: start + 1 == end
+        if nums[start] > nums[end]:
+            return nums[end]
+        else:
+            return nums[start]        
         
 if __name__ == '__main__':
     sol = Solution()
